@@ -2,26 +2,17 @@ package com.enyeinteractive.demo.marvelapi.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class MarvelViewModel: ViewModel() {
+class MarvelViewModel : ViewModel() {
+
+    private val marvelRepository = MarvelRepository()
 
 // region public
 
-    suspend fun loadData() {
-        //TODO: load some data
-    }
-
-    suspend fun fetchById(id: String) {
-
-    }
+    suspend fun loadData() = marvelRepository.getComics()
 
 // endregion
 
 // region private
 // endregion
 
-// region overrides
-// endregion
-
-// region companion
-// endregion
 }
