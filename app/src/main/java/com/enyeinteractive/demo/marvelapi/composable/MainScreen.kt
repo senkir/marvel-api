@@ -1,7 +1,7 @@
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -11,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import com.enyeinteractive.demo.marvelapi.composable.ComicView
 import com.enyeinteractive.demo.marvelapi.viewmodel.MarvelRepository
 import com.enyeinteractive.demo.marvelapi.viewmodel.MarvelViewModel
@@ -24,9 +25,9 @@ fun MainScreen(viewModel: MarvelViewModel) {
             topBar = {
                 TopAppBar(
                     title = {
-                        Text("Sample Marvel Api")
+                        Text("Sample Marvel Api", style = MaterialTheme.typography.h5)
                     },
-                    backgroundColor = MaterialTheme.colors.onBackground
+                    backgroundColor = MaterialTheme.colors.secondary
                 )
             }) {
             //content
@@ -36,23 +37,16 @@ fun MainScreen(viewModel: MarvelViewModel) {
             }
 
             val scope = rememberCoroutineScope()
-//
-//            LaunchedEffect(key1 = Unit) {
-//                scope.launch {
-//                    val result = viewModel.loadData()
-//                    comicData.value = result
-//                }
-//            }
+
+            LaunchedEffect(key1 = Unit) {
+                scope.launch {
+                    val result = viewModel.loadData()
+                    comicData.value = result
+                }
+            }
 
             if (comicData.value.isEmpty()) {
-                Button(onClick = {
-                    scope.launch {
-                        val result = viewModel.loadData()
-                        comicData.value = result
-                    }
-                }) {
-                    Text("Request")
-                }
+                Text(text = "Loading...", modifier = Modifier.fillMaxWidth())
             } else {
                 LazyColumn {
                     items(comicData.value) { comicData ->

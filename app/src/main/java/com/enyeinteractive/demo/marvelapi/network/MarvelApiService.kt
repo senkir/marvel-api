@@ -11,43 +11,43 @@ interface MarvelApiService {
         @Query("ts") timestamp: String,
         @Query("hash") hash: String,
         @Query("apikey") apiKey: String,
-        @Query("limit") limit: Int = 10
+        @Query("limit") limit: Int = 30
     ): ComicDataWrapper
 }
 
 @Serializable
 data class ComicDataWrapper(
-    val code: Int, //The HTTP status code of the returned result.,
-    val status: String?,// (string, optional): A string description of the call status.,
-    val data: ComicDataContainer?,// (ComicDataContainer, //optional ) : The results returned by the call.,
-    val etag: String?// (string, optional): A digest value of the content returned by the call.
+    val code: Int,
+    val status: String?,
+    val data: ComicDataContainer?,
+    val etag: String?
 )
 
 @Serializable
 data class ComicDataContainer(
-    val offset: Int?,//(int, optional): The requested offset (number of skipped results) of the call.,
-    val limit: Int?,//(int, optional): The requested result limit.,
-    val total: Int?,//(int, optional): The total number of resources available given the current filter set.,
-    val count: Int?,//(int, optional): The total number of results returned by this call.,
-    val results: Array<Comic>? //(Array[Comic], optional): The list of comics returned by the call
+    val offset: Int?,
+    val limit: Int?,
+    val total: Int?,
+    val count: Int?,
+    val results: List<Comic>?
 )
 
 @Serializable
 data class Comic(
-    val id: Int,//(int, optional): The unique ID of the comic resource.,
-    val digitalId: Int?,
-    val title: String?,//(string, optional): The canonical title of the comic.,
-    val issueNumber: Double?,
-    val variantDescription: String?,
-    val description: String?,
-    val modified: String?,
-    val isbn: String?,
-    val upc: String?,
-    val thumbnail: Image?// (Image, optional): The representative image for this comic.,
+    val id: Int,
+    val digitalId: Int? = null,
+    val title: String? = null,
+    val issueNumber: Double? = null,
+    val variantDescription: String? = null,
+    val description: String?= null,
+    val modified: String?= null,
+    val isbn: String?= null,
+    val upc: String?= null,
+    val thumbnail: Image?= null
 )
 
 @Serializable
 data class Image(
-    val path: String?,// (string, optional): The directory path of to the image.,
-    val extension: String?// (string, optional): The file extension for the image.
+    val path: String?,
+    val extension: String?
 )

@@ -4,31 +4,10 @@ import com.enyeinteractive.demo.marvelapi.BuildConfig
 import com.enyeinteractive.demo.marvelapi.network.ComicDataWrapper
 import com.enyeinteractive.demo.marvelapi.network.MarvelApiService
 import com.enyeinteractive.demo.marvelapi.network.Md5Helper
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
-import okhttp3.MediaType
-import retrofit2.Retrofit
 import java.util.Calendar
 
-class MarvelRepository {
+class MarvelRepository(private val service: MarvelApiService) {
 
-    private val contentType = MediaType.parse("application/json")
-
-
-    private val json = Json {
-        ignoreUnknownKeys = true
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://gateway.marvel.com")
-        .addConverterFactory(json.asConverterFactory(contentType!!))
-        .build()
-
-    private val service: MarvelApiService = retrofit
-        .create(MarvelApiService::class.java)
 
     // region public
     suspend fun getComics(): List<ComicViewData> {
@@ -48,11 +27,14 @@ class MarvelRepository {
         return if (count > 0) {
             val list = mutableListOf<ComicViewData>()
             this?.data?.results?.forEach { rawComic ->
+                val extension = rawComic.thumbnail?.extension
+                val path = rawComic.thumbnail?.path
                 list.add(
                     ComicViewData(
                         id = rawComic.isbn ?: "",
                         title = rawComic.title ?: "",
-                        imageUrl = rawComic.thumbnail?.path ?: ""
+                        description = rawComic.description ?: "",
+                        imageUrl = "$path.$extension" ?: ""
                     )
                 )
             }
@@ -67,6 +49,7 @@ class MarvelRepository {
     data class ComicViewData(
         val id: String,
         val title: String,
+        val description: String,
         val imageUrl: String
     )
 }
