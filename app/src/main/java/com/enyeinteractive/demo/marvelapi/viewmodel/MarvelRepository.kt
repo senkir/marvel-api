@@ -34,7 +34,7 @@ class MarvelRepository(private val service: MarvelApiService) {
                         id = rawComic.isbn ?: "",
                         title = rawComic.title ?: "",
                         description = rawComic.description ?: "",
-                        imageUrl = "$path.$extension" ?: ""
+                        imageUrl = "$path.$extension"
                     )
                 )
             }

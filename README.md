@@ -25,3 +25,10 @@ in build.gradle configure the following values.
         }
 
     }
+
+
+## Design Decisions
+
+I decided to use Compose for a modernized framework.  
+An alternate choice would have been standard XML layouts with ConstraintLayout.
+Using Compose also worked as an opportunity to use LazyColumn over RecyclerView.

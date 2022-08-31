@@ -13,19 +13,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel : MarvelViewModel by viewModels()
+        val viewModel: MarvelViewModel by viewModels()
 
         setContent {
             MainScreen(viewModel)
         }
-        //TODO: bind view model
-
-        //TODO: run query
-
-        //TODO: set up compose object
-
-        //TODO: render ui as a compose lazy column
-
 
     }
 

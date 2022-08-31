@@ -12,14 +12,13 @@ class MarvelViewModel : ViewModel() {
 
     private val contentType = MediaType.parse("application/json")
 
-
     private val json = Json {
         ignoreUnknownKeys = true
     }
 
     @OptIn(ExperimentalSerializationApi::class)
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://gateway.marvel.com")
+        .baseUrl(BASE_URL)
         .addConverterFactory(json.asConverterFactory(contentType!!))
         .build()
 
@@ -34,7 +33,8 @@ class MarvelViewModel : ViewModel() {
 
 // endregion
 
-// region private
-// endregion
 
+    companion object {
+        const val BASE_URL = "https://gateway.marvel.com"
+    }
 }
