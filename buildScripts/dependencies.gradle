@@ -27,10 +27,6 @@ ext {
 
     runTimeDependencies = [
             appCompat        : "androidx.appcompat:appcompat:$versions.androidXAppCompat",
-            androidXViewModel: "androidx.lifecycle:lifecycle-viewmodel:$versions.androidXLifecycle",
-            coroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinCoroutines",
-            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinCoroutines",
-            coroutineAdapter : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofitCoroutines",
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlinVersion",
             retrofit         : "com.squareup.retrofit2:retrofit:$versions.retrofit",
 
