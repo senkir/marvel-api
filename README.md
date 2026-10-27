@@ -1,6 +1,8 @@
 
 ## Marvel Developer API Sample Project
 
+Browse Marvel characters with Jetpack Compose, MVVM and Retrofit.
+
 Libraries Used
 * Retrofit
 * Kotlin Serialization
